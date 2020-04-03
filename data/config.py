@@ -168,22 +168,28 @@ pascal_sbd_dataset = dataset_base.copy({
     'class_names': PASCAL_CLASSES,
 })
 
-wolf_dataset = dataset_base.copy({
+wolf_dataset_v0 = dataset_base.copy({
     'name': 'Wolf floor',
 
-    # dataset_v0
-    # 'train_images': './dataset/dataset_v0/robot_images/',
-    # 'train_info':   './dataset/captions_train_wolf_v0.json',
+    'train_images': './dataset/dataset_v0/robot_images/',
+    'train_info':   './dataset/captions_train_wolf_v0.json',
 
-    # 'valid_images': './dataset/dataset_v0/tripod_images/',
-    # 'valid_info':   './dataset/captions_val_wolf_v0.json',
+    'valid_images': './dataset/dataset_v0/tripod_images/',
+    'valid_info':   './dataset/captions_val_wolf_v0.json',
 
-    # dataset_v1
+    'has_gt': True,
+    'class_names': ('carpet', 'plywood', 'tile')
+})
+
+wolf_dataset_v1 = dataset_base.copy({
+    'name': 'Wolf floor',
+
     'train_images': './dataset/dataset_v1/robot_images/',
     'train_info':   './dataset/dataset_v1/captions_train_wolf_v1.json',
 
     'valid_images': './dataset/dataset_v1/tripod_images/',
     'valid_info':   './dataset/dataset_v1/captions_val_wolf_v1.json',
+
 
     'has_gt': True,
     'class_names': ('carpet', 'plywood', 'tile')
@@ -777,15 +783,37 @@ yolact_resnet50_config = yolact_base_config.copy({
 wolf_resnet101_config = yolact_base_config.copy({
     'name': 'wolf_resnet101',
 
-    'dataset': wolf_dataset,
-    'num_classes': len(wolf_dataset.class_names) + 1,
+    'dataset': wolf_dataset_v0,
+    'num_classes': len(wolf_dataset_v0.class_names) + 1,
+})
+
+wolf_resnet101_config_v1 = yolact_base_config.copy({
+    'name': 'wolf_resnet101_v1',
+
+    'dataset': wolf_dataset_v1,
+    'num_classes': len(wolf_dataset_v1.class_names) + 1,
 })
 
 wolf_resnet50_config = yolact_base_config.copy({
     'name': 'wolf_resnet50',
 
-    'dataset': wolf_dataset,
-    'num_classes': len(wolf_dataset.class_names) + 1,
+    'dataset': wolf_dataset_v0,
+    'num_classes': len(wolf_dataset_v0.class_names) + 1,
+
+    'backbone': resnet50_backbone.copy({
+        'selected_layers': list(range(1, 4)),
+        'pred_scales': yolact_base_config.backbone.pred_scales,
+        'pred_aspect_ratios': yolact_base_config.backbone.pred_aspect_ratios,
+        'use_pixel_scales': True,
+        'preapply_sqrt': False,
+    }),
+})
+
+wolf_resnet50_config_v1 = yolact_base_config.copy({
+    'name': 'wolf_resnet50_v1',
+
+    'dataset': wolf_dataset_v1,
+    'num_classes': len(wolf_dataset_v1.class_names) + 1,
 
     'backbone': resnet50_backbone.copy({
         'selected_layers': list(range(1, 4)),
@@ -799,8 +827,23 @@ wolf_resnet50_config = yolact_base_config.copy({
 wolf_resnet152_config = yolact_base_config.copy({
     'name': 'wolf_resnet152',
 
-    'dataset': wolf_dataset,
-    'num_classes': len(wolf_dataset.class_names) + 1,
+    'dataset': wolf_dataset_v0,
+    'num_classes': len(wolf_dataset_v0.class_names) + 1,
+
+    'backbone': resnet152_backbone.copy({
+        'selected_layers': list(range(1, 4)),
+        'pred_scales': yolact_base_config.backbone.pred_scales,
+        'pred_aspect_ratios': yolact_base_config.backbone.pred_aspect_ratios,
+        'use_pixel_scales': True,
+        'preapply_sqrt': False,
+    }),
+})
+
+wolf_resnet152_config_v1 = yolact_base_config.copy({
+    'name': 'wolf_resnet152_v1',
+
+    'dataset': wolf_dataset_v1,
+    'num_classes': len(wolf_dataset_v1.class_names) + 1,
 
     'backbone': resnet152_backbone.copy({
         'selected_layers': list(range(1, 4)),
@@ -814,8 +857,23 @@ wolf_resnet152_config = yolact_base_config.copy({
 wolf_resnet34_config = yolact_base_config.copy({
     'name': 'wolf_resnet34',
 
-    'dataset': wolf_dataset,
-    'num_classes': len(wolf_dataset.class_names) + 1,
+    'dataset': wolf_dataset_v0,
+    'num_classes': len(wolf_dataset_v0.class_names) + 1,
+
+    'backbone': resnet34_backbone.copy({
+        'selected_layers': list(range(1, 4)),
+        'pred_scales': yolact_base_config.backbone.pred_scales,
+        'pred_aspect_ratios': yolact_base_config.backbone.pred_aspect_ratios,
+        'use_pixel_scales': True,
+        'preapply_sqrt': False,
+    }),
+})
+
+wolf_resnet34_config_v1 = yolact_base_config.copy({
+    'name': 'wolf_resnet34_v1',
+
+    'dataset': wolf_dataset_v1,
+    'num_classes': len(wolf_dataset_v1.class_names) + 1,
 
     'backbone': resnet34_backbone.copy({
         'selected_layers': list(range(1, 4)),
@@ -829,8 +887,23 @@ wolf_resnet34_config = yolact_base_config.copy({
 wolf_resnet18_config = yolact_base_config.copy({
     'name': 'wolf_resnet18',
 
-    'dataset': wolf_dataset,
-    'num_classes': len(wolf_dataset.class_names) + 1,
+    'dataset': wolf_dataset_v0,
+    'num_classes': len(wolf_dataset_v0.class_names) + 1,
+
+    'backbone': resnet18_backbone.copy({
+        'selected_layers': list(range(1, 4)),
+        'pred_scales': yolact_base_config.backbone.pred_scales,
+        'pred_aspect_ratios': yolact_base_config.backbone.pred_aspect_ratios,
+        'use_pixel_scales': True,
+        'preapply_sqrt': False,
+    }),
+})
+
+wolf_resnet18_config_v1 = yolact_base_config.copy({
+    'name': 'wolf_resnet18_v1',
+
+    'dataset': wolf_dataset_v1,
+    'num_classes': len(wolf_dataset_v1.class_names) + 1,
 
     'backbone': resnet18_backbone.copy({
         'selected_layers': list(range(1, 4)),

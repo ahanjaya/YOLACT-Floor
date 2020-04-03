@@ -104,7 +104,6 @@ dev.ipynb
 .vscode/
 
 # not ready
-videos/
 templates/
 data/ssd_dataloader.py
 data/datasets/
