@@ -161,5 +161,4 @@ _.py
 dataset/dataset_*/
 *.npy
 data/videos/
-data/images/
 
